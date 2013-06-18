@@ -25,6 +25,12 @@
 @synthesize dataInternal = _dataInternal;
 @synthesize oldCustomView = _oldCustomView;
 
+- (void)awakeFromNib
+{
+    contentLabel.dataDetectorTypes = NSTextCheckingTypeLink | NSTextCheckingTypePhoneNumber;
+    contentLabel.delegate = self;
+}
+
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
@@ -96,6 +102,16 @@
         bubbleImage.image = [[UIImage imageNamed:@"bubbleMine.png"] stretchableImageWithLeftCapWidth:15 topCapHeight:14];
         bubbleImage.frame = CGRectMake(x - 9, y - 4, width + 26, height + 15);
     }
+}
+
+- (void) attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithPhoneNumber:(NSString *)phoneNumber
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"tel://%@", phoneNumber]]];
+}
+
+- (void)attributedLabel:(TTTAttributedLabel *)label didSelectLinkWithURL:(NSURL *)url
+{
+    [[UIApplication sharedApplication] openURL:url];
 }
 
 @end

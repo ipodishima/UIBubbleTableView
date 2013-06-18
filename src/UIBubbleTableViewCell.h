@@ -14,11 +14,12 @@
 
 #import <UIKit/UIKit.h>
 #import "NSBubbleDataInternal.h"
-
-@interface UIBubbleTableViewCell : UITableViewCell
+#import "TTTAttributedLabel.h"
+ 
+@interface UIBubbleTableViewCell : UITableViewCell <TTTAttributedLabelDelegate>
 {
     IBOutlet UILabel *headerLabel;
-    IBOutlet UILabel *contentLabel;
+    IBOutlet TTTAttributedLabel *contentLabel;
     IBOutlet UIImageView *bubbleImage;
 }
 
